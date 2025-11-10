@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Fudo - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h1>📊 Análisis Fudo</h1>
+                <span class="version">Demo v1.0</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" data-section="dashboard">
+                    <span class="icon">📈</span>
+                    Dashboard
+                </li>
+                <li class="nav-item" data-section="charts">
+                    <span class="icon">📊</span>
+                    Gráficos
+                </li>
+                <li class="nav-item" data-section="report">
+                    <span class="icon">📄</span>
+                    Informe
+                </li>
+                <li class="nav-item" data-section="assistant">
+                    <span class="icon">🤖</span>
+                    Asistente
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <p>Datos: Octubre 2025</p>
+                <p class="data-info">📁 Datos de muestra embebidos</p>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <header class="section-header">
+                    <h2>Dashboard Principal</h2>
+                    <p class="subtitle">Resumen de ventas - Octubre 2025</p>
+                </header>
+
+                <!-- KPIs Grid -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">💰</div>
+                        <div class="kpi-content">
+                            <h3>Ventas Totales</h3>
+                            <p class="kpi-value" id="kpi-total-sales">$0</p>
+                            <span class="kpi-change positive">+0%</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">🛒</div>
+                        <div class="kpi-content">
+                            <h3>Transacciones</h3>
+                            <p class="kpi-value" id="kpi-transactions">0</p>
+                            <span class="kpi-change">0 por día</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">🎯</div>
+                        <div class="kpi-content">
+                            <h3>Ticket Promedio</h3>
+                            <p class="kpi-value" id="kpi-avg-ticket">$0</p>
+                            <span class="kpi-change">Por transacción</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-icon">📊</div>
+                        <div class="kpi-content">
+                            <h3>Margen Bruto</h3>
+                            <p class="kpi-value" id="kpi-margin">0%</p>
+                            <span class="kpi-change" id="kpi-margin-value">$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Charts -->
+                <div class="quick-charts">
+                    <div class="chart-card">
+                        <h3>Ventas por Día</h3>
+                        <canvas id="dailySalesChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Top Categorías</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Products Table -->
+                <div class="data-table-card">
+                    <h3>Top 10 Productos</h3>
+                    <table class="data-table" id="topProductsTable">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Cantidad</th>
+                                <th>Ventas</th>
+                                <th>Margen</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section id="charts" class="content-section">
+                <header class="section-header">
+                    <h2>Análisis Gráfico</h2>
+                    <p class="subtitle">Visualización detallada de datos</p>
+                </header>
+
+                <div class="charts-grid">
+                    <div class="chart-card large">
+                        <h3>Tendencia de Ventas</h3>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Distribución por Sucursal</h3>
+                        <canvas id="branchChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Heatmap por Hora</h3>
+                        <canvas id="heatmapChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Análisis de Margen</h3>
+                        <canvas id="marginAnalysisChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Comparación Semanal</h3>
+                        <canvas id="weeklyComparisonChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Report Section -->
+            <section id="report" class="content-section">
+                <header class="section-header">
+                    <h2>Informe Ejecutivo</h2>
+                    <div class="report-actions">
+                        <button class="btn btn-primary" onclick="app.generateReport()">
+                            📄 Generar Informe
+                        </button>
+                        <button class="btn btn-secondary" onclick="app.exportReport()">
+                            💾 Exportar PDF
+                        </button>
+                    </div>
+                </header>
+
+                <div id="reportContent" class="report-content">
+                    <div class="report-placeholder">
+                        <p>Haz clic en "Generar Informe" para crear un análisis completo</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Assistant Section -->
+            <section id="assistant" class="content-section">
+                <header class="section-header">
+                    <h2>Asistente Inteligente</h2>
+                    <p class="subtitle">Pregunta sobre tus datos de ventas</p>
+                </header>
+
+                <div class="assistant-container">
+                    <div class="chat-window" id="chatWindow">
+                        <div class="chat-message assistant">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <p>¡Hola! Soy tu asistente de análisis. Puedo responder preguntas sobre:</p>
+                                <ul>
+                                    <li>📈 Productos más y menos vendidos</li>
+                                    <li>💰 Ticket promedio y márgenes</li>
+                                    <li>📊 Comparaciones entre períodos</li>
+                                    <li>🎯 Recomendaciones de promociones</li>
+                                    <li>🏪 Análisis por sucursal</li>
+                                </ul>
+                                <p>¿En qué puedo ayudarte?</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <div class="suggested-questions">
+                            <button class="suggestion-chip" onclick="app.askAssistant('¿Cuáles son los productos más vendidos?')">
+                                Top productos
+                            </button>
+                            <button class="suggestion-chip" onclick="app.askAssistant('¿Qué promoción me conviene hacer?')">
+                                Promociones
+                            </button>
+                            <button class="suggestion-chip" onclick="app.askAssistant('¿Cuál es el ticket promedio?')">
+                                Ticket promedio
+                            </button>
+                            <button class="suggestion-chip" onclick="app.askAssistant('Compara la primera y segunda semana')">
+                                Comparar semanas
+                            </button>
+                        </div>
+                        <div class="chat-input">
+                            <input type="text" id="chatInput" placeholder="Escribe tu pregunta aquí..." 
+                                   onkeypress="if(event.key==='Enter') app.sendMessage()">
+                            <button class="send-btn" onclick="app.sendMessage()">
+                                ➤
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
